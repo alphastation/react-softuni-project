@@ -5,6 +5,8 @@ import {
   Route
 } from 'react-router-dom';
 
+import Navbar from './components/Navbar.jsx';
+
 import Dashboard from './pages/Dashboard.jsx';
 import ForgotPassword from './pages/ForgotPassword.jsx';
 import Offers from './pages/Offers.jsx';
@@ -25,6 +27,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
+        <Navbar />
       </Router>
 
       {/* <h1>Hellow from my App!!!</h1> */}
