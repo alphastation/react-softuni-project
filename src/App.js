@@ -4,6 +4,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import Navbar from './components/Navbar.jsx';
 
@@ -22,7 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/offers" element={<Offers />} />
-          <Route path="/profile" element={<SignIn />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -31,6 +32,7 @@ function App() {
       </Router>
 
       {/* <h1>Hellow from my App!!!</h1> */}
+      <ToastContainer />
     </>
   );
 }

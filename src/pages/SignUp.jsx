@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+
 import { Link, useNavigate } from 'react-router-dom';
 import {
   getAuth,
@@ -43,6 +45,8 @@ function SignUp() {
       await setDoc(doc(db, 'users', user.uid), formDataCopy);
       navigate('/');
     } catch (error) {
+      toast.error('Something went wrong with your register input!');
+
       console.log(error);
     }
   };
