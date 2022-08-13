@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';
 
@@ -11,6 +12,7 @@ function SignIn() {
   });
   const { email, password } = formData;
   const navigate = useNavigate();
+
   const onChange = e => {
     setFormData(prevState => ({ ...prevState, [e.target.id]: e.target.value }));
   };
@@ -57,7 +59,7 @@ function SignIn() {
         </div>
       </form>
       {/* {Google OAuth} */}
-      <Link to='sign-up' className='registerLink'>
+      <Link to='/sign-up' className='registerLink'>
         Sign Up Instead
       </Link>
     </>
