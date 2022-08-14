@@ -7,6 +7,8 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
+import OAuth from '../components/OAuth';
+
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase.config.js';
 
@@ -101,6 +103,7 @@ function SignUp() {
         </div>
       </form>
       {/* {Google OAuth} */}
+      <OAuth />
       <Link to='/sign-in' className='registerLink'>
         Sign In Instead
       </Link>
