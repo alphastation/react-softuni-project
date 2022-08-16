@@ -11,7 +11,19 @@ function Contact() {
   const [searchParams, setSearchParams] = useSearchParams();
   const params = useParams();
 
-  useEffect(() => {});
+  useEffect(() => {
+    const getLandlord = async () => {
+      const docRef = doc(db, 'users', params.landlordId);
+      const docSnap = await docRef.getDoc(docRef);
+      if (docSnap.exists()) {
+        setLandlord(docSnap.data());
+      } else {
+        toast.error('Could not get landlord data');
+      }
+    };
+
+    getLandlord();
+  }, [params.landlordId]);
 
   return <div>Contact</div>;
 }
