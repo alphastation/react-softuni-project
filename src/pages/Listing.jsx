@@ -2,12 +2,16 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+// import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import 'swiper/swiper-bundle.css';
 
 import { getDoc, doc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../firebase.config';
 import Spinner from '../components/Spinner';
 import shareIcon from '../assets/svg/shareIcon.svg';
+// SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 function Listing() {
   const [listing, setListing] = useState(null);
@@ -17,7 +21,21 @@ function Listing() {
   const navigate = useNavigate();
   const params = useParams();
   const auth = getAuth();
+  // const swiper = new Swiper('.swiper', {
+  //   // Optional parameters
+  //   direction: 'vertical',
+  //   loop: true,
 
+  //   // If we need pagination
+  //   pagination: {
+  //     el: '.swiper-pagination',
+  //   },
+
+  //   // And if we need scrollbar
+  //   scrollbar: {
+  //     el: '.swiper-scrollbar',
+  //   },
+  // });
   useEffect(() => {
     const fetchListing = async () => {
       const docRef = doc(db, 'listings', params.listingId);
@@ -38,8 +56,19 @@ function Listing() {
 
   return (
     <main>
-      {/* {SLIDER} */}
-
+      {/* <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+        {listing.imageUrls.map((url, index) => (
+          <SwiperSlide key={index}>
+            <div
+              style={{
+                background: `url(${listing.imageUrls[index]}) center no-repeat`,
+                backgroundSize: 'cover',
+              }}
+              className='swiperSlideDiv'
+            ></div>
+          </SwiperSlide>
+        ))}
+      </Swiper> */}
       <div
         className='shareIconDiv'
         onClick={() => {
@@ -70,7 +99,7 @@ function Listing() {
         </p>
         {listing.offer && (
           <p className='discountPrice'>
-            ${listing.regularPrice - listing.discountedPrice} discount
+            £{listing.regularPrice - listing.discountedPrice} discount
           </p>
         )}
         <ul className='listingDetailsList'>
