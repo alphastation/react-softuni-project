@@ -97,7 +97,7 @@ function Profile() {
     }
   };
 
-  const onEdit = async editingId => {};
+  const onEdit = async editingId => navigate(`/edit-listing/${editingId}`);
   return (
     <div className='profile'>
       <header className='profileHeader'>

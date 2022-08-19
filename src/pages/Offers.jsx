@@ -32,13 +32,13 @@ function Offers() {
           listingsRef,
           where('offer', '==', true),
           orderBy('timestamp', 'desc'),
-          limit(10)
+          limit(3)
         );
 
         // Execute query
         const querySnap = await getDocs(q);
 
-        const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+        const lastVisible = querySnap.docs[querySnap.docs.length - 1]; //for pagination purposes
         setLastFetchedListing(lastVisible);
 
         const listings = [];
@@ -60,7 +60,43 @@ function Offers() {
 
     fetchListings();
   }, []);
-  const onFetchMoreListings = () => {};
+
+  const onFetchMoreListings = async () => {
+    try {
+      // Get reference
+      const listingsRef = collection(db, 'listings');
+
+      // Create a query
+      const q = query(
+        listingsRef,
+        where('offer', '==', true),
+        orderBy('timestamp', 'desc'),
+        startAfter(lastFetchedListing),
+        limit(3)
+      );
+
+      // Execute query
+      const querySnap = await getDocs(q);
+
+      const lastVisible = querySnap.docs[querySnap.docs.length - 1]; //for pagination purposes
+      setLastFetchedListing(lastVisible);
+
+      const listings = [];
+
+      querySnap.forEach(doc => {
+        console.log(doc.data());
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setListings(prevState => [...prevState, ...listings]);
+      setLoading(false);
+    } catch (error) {
+      toast.error('Could not fetch listings');
+    }
+  };
 
   return (
     <div className='category'>
